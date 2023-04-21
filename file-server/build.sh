@@ -1,1 +1,3 @@
-docker build --build-arg ENABLED_MODULES="ndk lua fancyindex" --build-arg APK_MIRROR="mirrors.tuna.tsinghua.edu.cn" -t xinnj/file-server:1.0.0 .
+#!/usr/bin/env bash
+set -euaxo pipefail
+docker build --build-arg ENABLED_MODULES="ndk lua fancyindex" --build-arg APK_MIRROR="mirrors.tuna.tsinghua.edu.cn" -t xinnj/file-server:$1 .

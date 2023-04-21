@@ -84,6 +84,7 @@ RUN set -ex \
 COPY nginx.conf /etc/nginx/
 COPY *.lua /etc/nginx/lua/
 COPY fancyindex-theme /data/fancyindex
+COPY ios-install-images/* /data/ios-install-images/
 
 VOLUME /data/download
-CMD chown uploader:uploader /data/download && /usr/sbin/nginx -g 'daemon off;'
+CMD cp -rf /data/ios-install-images /data/download/ && chown uploader:uploader /data/download && /usr/sbin/nginx -g 'daemon off;'
