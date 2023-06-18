@@ -4,7 +4,7 @@ RUN addgroup -g 1000 uploader && adduser -D -u 1000 -G uploader uploader && echo
 RUN mkdir /data && chown uploader:uploader /data
 
 # install samba server
-RUN apk add --no-cache samba
+RUN apk add --no-cache samba tzdata
 
 COPY smb.conf /etc/samba/
 RUN echo -e "PleaseUploadHere\nPleaseUploadHere" | smbpasswd -a -s -c /etc/samba/smb.conf uploader
