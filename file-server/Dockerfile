@@ -78,13 +78,15 @@ RUN set -ex \
 RUN set -ex \
     # create uploader user/group first, to be consistent throughout docker variants
     && addgroup -g 1000 -S uploader \
-    && adduser -S -D -H -u 1000 -h /var/cache/uploader -s /sbin/nologin -G uploader -g uploader uploader \
-    && mkdir -p /data/download
+    && adduser -S -D -H -u 1000 -h /var/cache/uploader -s /sbin/nologin -G uploader -g uploader uploader
 
 COPY nginx.conf /etc/nginx/
 COPY *.lua /etc/nginx/lua/
-COPY fancyindex-theme /data/fancyindex
-COPY ios-install-images/* /data/ios-install-images/
+COPY fancyindex-theme /source/fancyindex
+COPY ios-install-images/* /source/ios-install-images/
+COPY --chmod=755 Start.sh /
 
-VOLUME /data/download
-CMD cp -rf /data/ios-install-images /data/download/ && chown uploader:uploader /data/download && /usr/sbin/nginx -g 'daemon off;'
+VOLUME /data
+ENV URL_PREFIX="/download"
+
+CMD /Start.sh
