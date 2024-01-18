@@ -1,4 +1,4 @@
-FROM jenkins/inbound-agent:4.11-1-alpine-jdk11
+FROM jenkins/inbound-agent:4.13.3-1-alpine-jdk11
 
 ARG user=jenkins
 
