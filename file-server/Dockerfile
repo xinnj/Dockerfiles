@@ -74,6 +74,7 @@ RUN set -ex \
            apk add --no-cache --allow-untrusted /tmp/packages/nginx-module-${module}-${NGINX_VERSION}*.apk; \
        done \
     && rm -rf /tmp/packages
+RUN apk add --no-cache bash
 
 RUN set -ex \
     # create uploader user/group first, to be consistent throughout docker variants
@@ -84,6 +85,7 @@ COPY nginx.conf /etc/nginx/
 COPY *.lua /etc/nginx/lua/
 COPY fancyindex-theme /source/fancyindex
 COPY ios-install-images/* /source/ios-install-images/
+COPY --chmod=755 /house-keeping/Clean.sh /
 COPY --chmod=755 Start.sh /
 
 VOLUME /data
