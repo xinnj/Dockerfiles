@@ -89,6 +89,6 @@ COPY --chmod=755 /house-keeping/Clean.sh /
 COPY --chmod=755 Start.sh /
 
 VOLUME /data
-ENV URL_PREFIX="/download"
+ENV URL_PREFIX="/"
 
 CMD /Start.sh
