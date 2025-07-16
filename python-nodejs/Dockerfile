@@ -1,0 +1,6 @@
+FROM docker.io/nikolaik/python-nodejs:python3.13-nodejs20-slim
+
+# Install necessary system dependencies and Node.js
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
