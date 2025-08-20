@@ -1,5 +1,6 @@
-FROM docker.io/nikolaik/python-nodejs:python3.13-nodejs20-slim
+FROM docker.io/nikolaik/python-nodejs:python3.13-nodejs22-slim
 
+RUN npm install -g pnpm
 # Install necessary system dependencies and Node.js
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
