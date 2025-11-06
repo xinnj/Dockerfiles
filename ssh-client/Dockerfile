@@ -6,7 +6,9 @@ RUN apk add --no-cache \
     sshpass \
     expect \
     sudo \
-    gettext
+    gettext \
+    bash \
+    perl
 
 RUN adduser -D jenkins \
     && echo 'jenkins ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
