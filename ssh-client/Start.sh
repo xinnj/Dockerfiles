@@ -1,5 +1,5 @@
 #!/bin/sh
-set -e
+set -euao pipefail
 
 IP=$(getent hosts ${REMOTE_HOST} | cut -d' ' -f1)
 sudo -- sh -c "echo  \ \ >> /etc/hosts"; sudo -- sh -c "echo ${IP} remote-host >> /etc/hosts"
@@ -11,7 +11,7 @@ echo ${IP} remote-host > ./hosts
 }
 for i in {1..3}; do
   if [[ "${REMOTE_TYPE}" == "linux" ]]; then
-    sshpass -p${PASSWORD} ssh-copy-id -i "${SSH_KEY}.pub" -p ${REMOTE_PORT} ${USERNAME}@${IP} > /dev/null
+    sshpass -p${PASSWORD} ssh-copy-id -i "${SSH_KEY}.pub" -p ${REMOTE_PORT} ${USERNAME}@${IP} 2>&1 >/dev/null | grep -v "expr"
   else
     ./ssh-copy-id-win ${IP} ${REMOTE_PORT} ${USERNAME} ${PASSWORD} "${SSH_KEY}.pub" > /dev/null
   fi
